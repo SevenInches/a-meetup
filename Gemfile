@@ -36,9 +36,11 @@ gem 'rabl'
 
 gem 'rspec-rails', :group => [:development, :test]
 
-gem "factory_girl_rails", :group => [:development, :test]
+gem "factory_girl_rails", :group => [:test]
 
 gem "faker", :group => [:test]
+
+gem "capybara", :group => [:test]
 
 gem 'shoulda-matchers'
 
