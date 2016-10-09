@@ -1,4 +1,5 @@
-class UsersController < ApplicationController
+class UsersController < ApplicationController 
+
   def signup
     @user = User.new
   end
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
       flash.notice = "用户名密码错误！"
       redirect_to :login
     end
-  end
+  end  
 
   def logout
     cookies.delete(:auth_token)
@@ -36,7 +37,10 @@ class UsersController < ApplicationController
   end
 
   private
-   def user_params
+
+    def user_params
      params.require(:user).permit!
-   end
+    end
+
 end
+
