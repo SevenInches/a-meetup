@@ -1,28 +1,38 @@
-class Api::V1::llIssuesController < Api::V1::BaseController	 	
-
-  require 'rack'
-
-  class Authentic
-    def initialize(app)
-      @app = app
-      @header_name = "X-Authentic"
-    end
-
-    def call(env)
-      status, headers, body = @app.call(env)
-
-      if !current_user.present?
-        status = 401
-        headers = {"Content-Type" => "text/json"}
-        body = ["用户认证失败,请重新登陆"]
-      end
-    end
-  end
-
+class Api::V1::IssuesController < Api::V1::BaseController	 
+  before_action :authenticate_user!, except: [:index]
+  before_action :set_issue, only: [:show, :update, :destroy]
 
   def index
     @issues  = Issue.all
     @total   = @issues.count
-  end 
-  
+  end
+
+  def show
+     @comments = @issue.comments
+  end
+
+  def update
+    if @issue.update_attributes(issue_params)
+      render :show
+    else
+      render json: { status: 'failure' }.to_json
+    end  
+  end
+
+  def destroy
+    if @issue.destroy
+      render json: { status: 'success' }.to_json
+    else  
+      render json: { status: 'failure' }.to_json
+    end
+  end
+
+  private
+    def set_issue
+      @issue = Issue.find(params[:id])
+    end
+
+    def issue_params
+      params.permit(:title, :content, :user_id)
+    end
 end

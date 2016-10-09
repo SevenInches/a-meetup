@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       UserMailer.welcome_email(@user).deliver
-      cookies[:auth_token] = @user.auth_token
+      cookies[:auth_token] = @user.authentication_token
       redirect_to :root
     else
       render :signup
@@ -19,9 +19,9 @@ class UsersController < ApplicationController
     user = User.find_by_name(params[:name])
     if user && user.authenticate(params[:password])
       if params[:remember_me]
-        cookies.permanent[:auth_token] = user.auth_token
+        cookies.permanent[:auth_token] = user.authentication_token
       else
-        cookies[:auth_token] = user.auth_token
+        cookies[:auth_token] = user.authentication_token
       end
       flash.notice = "登录成功！"
       redirect_to :root

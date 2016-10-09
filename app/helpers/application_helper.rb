@@ -17,4 +17,9 @@ module ApplicationHelper
     }
     Redcarpet::Markdown.new(renderer, options).render(text).html_safe
   end
+
+  def format_date(date)
+    date.strftime("%Y-%m-%d %H:%M")
+  end
+
 end

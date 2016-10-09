@@ -21,9 +21,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :issues, only: [:index]
+      resources :issues
       resources :users
       post "login" => "users#login", :as => "login"
+      get "logout" => "users#logout", :as => "logout"
     end  
   end
 

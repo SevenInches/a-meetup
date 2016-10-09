@@ -7,8 +7,13 @@ gem 'redcarpet'
 
 gem 'bootstrap'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.2'
-# Use mysql as the database for Active Record
+gem 'rails', '4.2.0'
+
+gem 'responders', '~> 2.0'
+
+gem 'bcrypt', '~> 3.1.7'
+
+# Use mysql as thedatabase for Active Record
 gem 'mysql2', '~> 0.3.20'
 # Use SCSS for stylesheets
 # Use CoffeeScript for .js.coffee assets and views
@@ -31,6 +36,8 @@ gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+
+gem 'pundit'
 
 gem 'rabl'
 
