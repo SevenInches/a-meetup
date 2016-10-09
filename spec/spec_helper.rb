@@ -16,7 +16,6 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require 'rspec/collection_matchers'
 require 'rails_helper'
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}

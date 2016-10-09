@@ -40,6 +40,8 @@ gem "factory_girl_rails", :group => [:development, :test]
 
 gem "faker", :group => [:test]
 
+gem 'shoulda-matchers'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
