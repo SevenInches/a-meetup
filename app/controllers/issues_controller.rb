@@ -1,21 +1,17 @@
 class IssuesController < ApplicationController
+  before_action :authenticate, except: [:index, :show]
+  before_action :set_issue, only: [:show, :edit, :update, :destroy]
+
   def show
-     @issue = Issue.find(params[:id])
      @comments = @issue.comments
   end
 
   def new
-    if not current_user
-      flash[:notice] = "请先登录"
-      redirect_to :root
-      return
-    else
-       @issue = Issue.new
-     end
+    @issue = Issue.new
   end
 
   def edit
-    @issue = Issue.find(params[:id])     
+         
   end
 
   def create
@@ -24,18 +20,20 @@ class IssuesController < ApplicationController
   end
 
   def update
-    i = Issue.find(params[:id])
-    i.update_attributes(issue_params)
+    @issue.update_attributes(issue_params)
     redirect_to :root
   end
 
   def destroy
-    i = Issue.find(params[:id])
-    i.destroy
+    @issue.destroy
     redirect_to :root
   end
 
   private
+    def set_issue
+      @issue = Issue.find(params[:id])
+    end
+
     def issue_params
       params.require(:issue).permit(:title, :content, :user_id)
     end
