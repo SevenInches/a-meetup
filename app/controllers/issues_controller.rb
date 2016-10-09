@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
-  before_action :authenticate, except: [:index, :show]
+  before_action :authenticate, except: [:show]
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
 
   def show

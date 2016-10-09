@@ -2,7 +2,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :issue do
-  	user_id {Faker::Number.digit }
+  	user_id 1
 	title {Faker::Name.title }
 	content {Faker::Name.title} 
 
