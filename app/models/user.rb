@@ -4,20 +4,21 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :issues
 
-  before_create { generate_token(:authentication_token) }
-  
+  before_create :generate_authentication_token
+
   validates :name, :email, presence: true
   validates :name, :email, uniqueness: { case_sensitive: false }
 
 
-  def generate_token(column)
-    begin
-      self[column] = SecureRandom.urlsafe_base64
-    end while User.exists?(column => self[column])
+  def generate_authentication_token 
+    loop do 
+      self.authentication_token = SecureRandom.base64(64) 
+      break unless User.find_by(authentication_token: authentication_token) 
+    end 
   end
 
   def reset_authentication_token!
-    generate_token(:authentication_token)
+    generate_authentication_token
     save
   end
 

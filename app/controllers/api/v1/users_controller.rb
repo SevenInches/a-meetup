@@ -1,7 +1,7 @@
 class Api::V1::UsersController < Api::V1::BaseController   
 
   def login
-    @user = User.find_by_name(params[:name])
+    @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       self.current_user = @user
       render :login
